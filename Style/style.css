@@ -8,6 +8,12 @@
 
 .menu-hamburger {
     text-decoration: none;
+    cursor: pointer;
+    color: black;
+    padding: 0.5em;
+    font-size: 18px;
+    background: none;
+    border: none;
 }
 
 .header-title {
@@ -21,7 +27,7 @@
 
 .sidepanel {
     position: fixed;
-    display: flex;
+    width: 0px;
     top: 20;
     left: 0;
     justify-content: space-evenly;

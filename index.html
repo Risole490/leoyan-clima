@@ -6,19 +6,18 @@
     <title>Clima daora</title>
 
     <script src="https://kit.fontawesome.com/787c4f20e3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="stylesheet" href="/Style/reset.css">
     <link rel="stylesheet" href="/Style/style.css">
 </head>
 <body>
     <header class="header-container">
         <div class="header">
-            <a href="#" class="menu-hamburger"><i class="fa-solid fa-bars fa-2xl"></i></a>
+            <button href="#" class="menu-hamburger" onclick="toggleSidepanel()"><i class="fa-solid fa-bars fa-2xl"></i></button>
             <h1 class="header-title">Leoyan</h1>
             <img src="/Images/brazil-svgrepo-com.svg" alt="Ícone brazil" class="bandeira-lang">
         </div>
 
-        <div class="sidepanel">
+        <div class="sidepanel" id="mySidepanel">
             <a href="#" class="sidepanel-link"><i class="fa-solid fa-house sidepanel-link-icon"></i>Home</a>
             <a href="#" class="sidepanel-link"><i class="fa-solid fa-cloud-sun sidepanel-link-icon"></i>Clima</a>
             <a href="#" class="sidepanel-link"><img src="/Images/icons8-pokemon-48.png" alt="Ícone pokebola" class="pokeball sidepanel-link-icon">Pokédex</a>
@@ -37,6 +36,7 @@
         </div>
     </div>
     
+    <script src="/Scripts/pscript.js"></script>
     <script src="/Scripts/testapi.js"></script>
 </body>
 </html>
