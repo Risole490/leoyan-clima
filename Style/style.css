@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 3em;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.menu-hamburger {
+    text-decoration: none;
+}
+
+.header-title {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.bandeira-lang {
+    width: 45px;
+}
+
+.sidepanel {
+    position: fixed;
+    display: flex;
+    top: 20;
+    left: 0;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.sidepanel-link {
+    text-decoration: none;
+    border-bottom: 1px solid;
+    font-size: 22px;
+    font-weight: bold;
+    width: 200px;
+    text-align: center;
+    padding: 1em;
+}
