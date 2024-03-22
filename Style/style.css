@@ -57,3 +57,66 @@
 .pokeball {
     width: 15%;
 }
+
+.banner-container {
+    background-image: url(/Images/beach-1852945_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 2em 2em 0em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.banner {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.banner-title {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+}
+
+.banner-description {
+    font-size: 22px;
+    color: white;
+}
+
+.formulario {
+    margin: 3em 0em 1em 0em;
+    box-shadow: 2px 2px 6px;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.form-input-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.input-search {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em 1em;
+    border-radius: 3px;
+    border: 1px solid;
+}
+
+.btn-search {
+    display: flex;
+    gap: 10px;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+}
