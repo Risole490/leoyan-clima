@@ -5,6 +5,8 @@ const GeoURL = `http://api.openweathermap.org/geo/1.0/direct?q=Londres&limit=5&a
 const cityInput = document.querySelector('#city-input')
 const searchBtn = document.querySelector('#search')
 
+const cityInfo = document.querySelector('#city-infos')
+
 const cityElement = document.querySelector('#city')
 const tempElement = document.querySelector('#temperature span')
 const descElement = document.querySelector('#description')
@@ -49,29 +51,53 @@ function timeConverter(timestampUnix){
     return time;
 }
 
+function dateConverter(dataCidade, timezone){
+    const dataRecebida = new Date(dataCidade*1000)
+    const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    const mes = meses[dataRecebida.getMonth()];
+    const dia = dataRecebida.getDate();
+    const hora = dataRecebida.getHours();
+    const minuto = dataRecebida.getMinutes();
+    const dataCidadeFormatada = `${dia} ${mes} ${hora}:${minuto}`
+    return dataCidadeFormatada
+}
+
 function displayWeather(data){
     console.log(data)
 
-    const climaDescricao = data.weather[0].description
-    const climaIcone = data.weather[0].icon
-    console.log(climaDescricao)
-
-    const cityTemperatura = parseInt(data.main.temp)
-    const citySensacao = parseInt(data.main.feels_like)
-    const cityPressao = data.main.pressure
-    const cityUmidade = data.main.humidity
-    const cityVisibilidade = data.visibility
-    const cityWindSpeed = parseInt(data.wind.speed)
-    const cityWindDirection = data.wind.deg
+    const cityName = data.name
     const cityCountry = data.sys.country
-    const citySunriseUnix = data.sys.sunrise
-    const citySunsetUnix = data.sys.sunset
+    const cityDate = data.dt
+    const cityTimezone = data.timezone
 
-    var cityNascerDoSol = timeConverter(citySunriseUnix)
-    var cityPorDoSol = timeConverter(citySunsetUnix)
+    const dataCidadeFormatada = dateConverter(cityDate, cityTimezone)
+    inserirInfosCidade(cityName, cityCountry, dataCidadeFormatada)
 
-    console.log(cityCountry, cityNascerDoSol, cityPorDoSol)
 
+
+    // const climaDescricao = data.weather[0].description
+    // const climaIcone = data.weather[0].icon
+    // const cityTemperatura = parseInt(data.main.temp)
+    // const citySensacao = parseInt(data.main.feels_like)
+    // const cityPressao = data.main.pressure
+    // const cityUmidade = data.main.humidity
+    // const cityVisibilidade = data.visibility
+    // const cityWindSpeed = parseInt(data.wind.speed)
+    // const cityWindDirection = data.wind.deg
+    // const citySunriseUnix = data.sys.sunrise
+    // const citySunsetUnix = data.sys.sunset
+
+    // var cityNascerDoSol = timeConverter(citySunriseUnix)
+    // var cityPorDoSol = timeConverter(citySunsetUnix)
+}
+
+function inserirInfosCidade(cidade,pais,data){
+    cityInfo.innerHTML = `
+        <h1 class="city-name">${cidade}, ${pais}</h1>
+        <div class="city-date-container">
+            <h2 class="city-date">${data}</h2>
+        </div>
+    `
 }
 
 //Events

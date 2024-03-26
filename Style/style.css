@@ -120,3 +120,31 @@
     background-color: white;
     cursor: pointer;
 }
+
+
+/* WEATHER SECTION */
+
+.weather-container {
+    padding: 1em 1.5em;
+    border: 1px solid blue;
+    background-color: #2F8CCF;
+}
+
+.city-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border: 1px solid;
+}
+
+.city-name {
+    font-size: 38px;
+    color: white;
+    font-weight: 700;
+}
+
+.city-date {
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+}
