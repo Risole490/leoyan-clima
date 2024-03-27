@@ -1,23 +1,14 @@
 const apiKEY = '563d3432cd1394d7ff15b978d9aa148e'
 const apiCountryURL = 'https://flagcdn.com/16x12/ua.png'
-const GeoURL = `http://api.openweathermap.org/geo/1.0/direct?q=Londres&limit=5&appid=${apiKEY}`
+const timeKEY = '174bbe7276ed4359a11f5024026858aa'
 
 const cityInput = document.querySelector('#city-input')
 const searchBtn = document.querySelector('#search')
 
 const cityInfo = document.querySelector('#city-infos')
 
-const cityElement = document.querySelector('#city')
-const tempElement = document.querySelector('#temperature span')
-const descElement = document.querySelector('#description')
-const weatherIconElement = document.querySelector('#weather-icon')
-const countryElement = document.querySelector('#country')
-const windElement = document.querySelector('#wind span')
-const umidityElement = document.querySelector('#umidity span')
-
 
 //Functions
-
 function getWeatherData(city){
 
     if(!city){
@@ -39,27 +30,39 @@ function getWeatherData(city){
         })
 }
 
-function timeConverter(timestampUnix){
-    var a = new Date(timestampUnix*1000)
-    var months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + 'h' + min;
-    return time;
-}
+// function timeConverter(timestampUnix){
+//     var a = new Date(timestampUnix*1000)
+//     var months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+//     var year = a.getFullYear();
+//     var month = months[a.getMonth()];
+//     var date = a.getDate();
+//     var hour = a.getHours();
+//     var min = a.getMinutes();
+//     var time = date + ' ' + month + ' ' + year + ' ' + hour + 'h' + min;
+//     return time;
+// }
 
-function dateConverter(dataCidade, timezone){
-    const dataRecebida = new Date(dataCidade*1000)
-    const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    const mes = meses[dataRecebida.getMonth()];
-    const dia = dataRecebida.getDate();
-    const hora = dataRecebida.getHours();
-    const minuto = dataRecebida.getMinutes();
-    const dataCidadeFormatada = `${dia} ${mes} ${hora}:${minuto}`
-    return dataCidadeFormatada
+function timeLocal(latitude, longitude){
+    if(!latitude || !longitude){
+        alert('Sem lat e long.')
+        return;
+    }
+
+    const timeURL = `https://api.ipgeolocation.io/timezone?apiKey=${timeKEY}&lat=${latitude}&long=${longitude}`
+
+    fetch(timeURL)
+        .then(responseTime => responseTime.json())
+        .then(dataTime => {
+            console.log(dataTime)    
+        })
+        .catch(error => {
+            console.error('Erro fetching current date:', error);
+            alert('Error fetching current date. Please try again.')
+        })
+
+
+    // const dataCidadeFormatada = `${dia} ${mes} ${hora}:${minuto}`
+    // return dataCidadeFormatada
 }
 
 function displayWeather(data){
@@ -67,11 +70,11 @@ function displayWeather(data){
 
     const cityName = data.name
     const cityCountry = data.sys.country
-    const cityDate = data.dt
-    const cityTimezone = data.timezone
+    const cityLong = data.coord.lon
+    const cityLat = data.coord.lat
 
-    const dataCidadeFormatada = dateConverter(cityDate, cityTimezone)
-    inserirInfosCidade(cityName, cityCountry, dataCidadeFormatada)
+    const dataCidadeFormatada = timeLocal(cityLong, cityLat)
+    // inserirInfosCidade(cityName, cityCountry, dataCidadeFormatada)
 
 
 
@@ -108,40 +111,3 @@ searchBtn.addEventListener("click", (e)=> {
 
     getWeatherData(city)
 })
-
-
-
-
-
-
-
-
-
-
-// async function consultaLatLong(url){
-//     const response = await fetch(url)
-//     if(!response.ok){
-//         throw new Error(`API call failed with status ${response.status}`)
-//     }
-//     const data = await response.json();
-//     return data
-// }
-
-// let guardaCidade = []
-// function selecionaResultados(data){
-//     for(let i=0; i < data.length; i++){
-//         guardaCidade.push(data[i].name)
-//     }
-// }
-
-
-
-// consultaLatLong(GeoURL)
-// .then (data => {
-//     console.log(data)
-//     selecionaResultados(data)
-//     console.log(guardaCidade.length)
-// })
-// .catch(error => {
-//     console.log(error)
-// })
