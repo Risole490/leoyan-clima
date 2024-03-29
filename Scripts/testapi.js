@@ -11,6 +11,7 @@ const cityInfos = document.querySelector('#city-infos-container')
 async function getWeatherData(city){
     let cidadeNome
     let cidadePais
+    let iconeClima
 
     if(!city){
         alert('Selecione uma cidade.')
@@ -22,8 +23,10 @@ async function getWeatherData(city){
     try{ 
         const response = await fetch(currentWeatherURL)
         const data = await response.json()
+        console.log(data)
         cidadeNome = data.name
         cidadePais = data.sys.country
+        iconeClima = data.weather[0].icon
         }
      catch(error) {
             console.error('Erro fetching current weather data:', error);
@@ -31,6 +34,8 @@ async function getWeatherData(city){
         }
 
     const horarioCidadeFormatado = await timeLocal(cidadeNome)
+    const cidadeIconeClima = await getIconeClima(iconeClima)
+    console.log(cidadeIconeClima)
     
     displayWeather(cidadeNome,cidadePais,horarioCidadeFormatado)
 }
@@ -45,6 +50,24 @@ function converterData(dataCompleta){
     const min = a.getMinutes()
     const time = date + ' ' + month + ' ' + year + ' ' + hour + 'h' + min;
     return time;
+}
+
+async function getIconeClima(idIcone){
+    if(!idIcone){
+        alert('Sem ícones')
+        return
+    }
+
+    const iconeURL = `https://openweathermap.org/img/wn/${idIcone}@2x.png`
+
+    try {
+        const response = await fetch(iconeURL)
+        const iconePNG = response.url
+        return iconePNG
+    } catch (error) {
+        console.error('Erro fetching icon:', error);
+        alert('Error fetching icon. Please try again.')
+    }
 }
 
 async function timeLocal(cidade){
@@ -71,7 +94,7 @@ async function timeLocal(cidade){
 
 async function displayWeather(cidade,pais,date){
     await inserirInfosCidade(cidade, pais, date)
-    
+
 
     // const climaDescricao = data.weather[0].description
     // const climaIcone = data.weather[0].icon
