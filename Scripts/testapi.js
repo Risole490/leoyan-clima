@@ -62,7 +62,6 @@ async function timeLocal(cidade){
     try{ 
         const response = await fetch(timeURL)
         const data = await response.json()
-        console.log(data)
         const dataCompletaCidade = data.date_time_txt
         const dataConvertida = converterData(dataCompletaCidade)
         return dataConvertida
@@ -118,7 +117,7 @@ async function inserirInfosCidade(cidade,pais,data,icone,temp,sens){
         </div>
 
         <div class="city-weather-infos">
-            <img src="https://openweathermap.org/img/wn/${icone}@2x.png" alt="Ícone do clima" class="icone-clima">
+            <img src="${icone}" alt="Ícone do clima" class="icone-clima">
             <div class="weater-temps-container">
                 <h1 class="weather-temperatura">${temp}°C</h1>
                 <h2 class="weather-sensacao">Sensação de ${sens}°C</h2>
