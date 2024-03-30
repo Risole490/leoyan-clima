@@ -148,3 +148,20 @@
     font-size: 30px;
     font-weight: 700;
 }
+
+.city-weather-infos {
+    display: flex;
+    align-items: center;
+}
+
+.icone-clima{
+    width: 150px;
+}
+
+.weather-temperatura {
+    font-size: 64px;
+}
+
+.weather-sensacao {
+    font-size: 24px;
+}
