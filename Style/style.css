@@ -156,6 +156,7 @@
 .city-weather-infos {
     display: flex;
     align-items: center;
+    margin-top: 2em;
 }
 
 .icone-clima{
@@ -170,8 +171,19 @@
     font-size: 24px;
 }
 
-.weather-condition-text {
+.weather-conditions-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3em;
+}
+
+.weather-condition {
     font-size: 32px;
     margin: 0em 0em 1em 0em;
     font-weight: 700;
+}
+
+.weather-conditions-details {
+    display: flex;
+    gap: 2em;
 }

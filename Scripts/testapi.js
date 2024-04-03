@@ -9,7 +9,7 @@ const cityWeatherArea = document.querySelector('#city-infos-container')
 
 //Functions
 async function getWeatherData(cidade){
-    let cidadeNome, cidadePais, iconeClima, temperatura, sensacao
+    let cidadeNome, cidadePais, iconeClima, temperatura, sensacao, condicao, vento, umidade, visibi, pressure
 
     if(!cidade){
         alert('Insira algo no campo de busca!')
@@ -33,6 +33,15 @@ async function getWeatherData(cidade){
         iconeClima = data.weather[0].icon
         temperatura = parseInt(data.main.temp)
         sensacao = parseInt(data.main.feels_like)
+
+        condicao = data.weather[0].description
+        vento = data.wind.speed
+        umidade = data.main.humidity
+        visibi = data.visibility / 1000
+        pressure = data.main.pressure
+
+        console.log(condicao,vento,umidade, visibi, pressure)
+        
         }
      catch(error) {
             console.error('Erro fetching current weather data:', error);
