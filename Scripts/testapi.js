@@ -4,24 +4,30 @@ const timeKEY = '174bbe7276ed4359a11f5024026858aa'
 const cityInput = document.querySelector('#city-input')
 const searchBtn = document.querySelector('#search')
 
-const cityInfos = document.querySelector('#city-infos-container')
+const cityWeatherArea = document.querySelector('#city-infos-container')
 
 
 //Functions
-async function getWeatherData(city){
+async function getWeatherData(cidade){
     let cidadeNome, cidadePais, iconeClima, temperatura, sensacao
 
-    if(!city){
-        alert('Selecione uma cidade.')
+    if(!cidade){
+        alert('Insira algo no campo de busca!')
         return;
     }
 
-    const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKEY}&lang=pt_br`
+    const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=${apiKEY}&lang=pt_br`
 
     try{ 
         const response = await fetch(currentWeatherURL)
         const data = await response.json()
         console.log(data)
+
+        if(data.cod === '404'){
+            alert('Cidade não encontrada')
+            return;
+        }
+
         cidadeNome = data.name
         cidadePais = data.sys.country
         iconeClima = data.weather[0].icon
@@ -36,7 +42,7 @@ async function getWeatherData(city){
     const horarioCidadeFormatado = await timeLocal(cidadeNome)
     const cidadeIconeClima = await getIconeClima(iconeClima)
     
-    displayWeather(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
+    inserirInfosClima(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
 }
 
 function converterData(dataCompleta){
@@ -74,7 +80,7 @@ async function timeLocal(cidade){
 
 async function getIconeClima(idIcone){
     if(!idIcone){
-        alert('Sem ícones')
+        alert('Ícone não disponível.')
         return
     }
 
@@ -90,25 +96,8 @@ async function getIconeClima(idIcone){
     }
 }
 
-async function displayWeather(cidade,pais,date, icone, temperatura,sensacao){
-    await inserirInfosCidade(cidade, pais, date, icone, temperatura,sensacao)
-
-
-    // const climaDescricao = data.weather[0].description
-    // const climaIcone = data.weather[0].icon
-    // const cityTemperatura = parseInt(data.main.temp)
-    // const citySensacao = parseInt(data.main.feels_like)
-    // const cityPressao = data.main.pressure
-    // const cityUmidade = data.main.humidity
-    // const cityVisibilidade = data.visibility
-    // const cityWindSpeed = parseInt(data.wind.speed)
-    // const cityWindDirection = data.wind.deg
-    // const citySunriseUnix = data.sys.sunrise
-    // const citySunsetUnix = data.sys.sunset
-}
-
-async function inserirInfosCidade(cidade,pais,data,icone,temp,sens){
-    cityInfos.innerHTML = `
+async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
+    cityWeatherArea.innerHTML = `
         <div class="city-info">
             <h1 class="city-name">${cidade}, ${pais}</h1>
             <div class="city-date-container">
@@ -124,6 +113,30 @@ async function inserirInfosCidade(cidade,pais,data,icone,temp,sens){
             </div>
         </div>
     `
+    cityWeatherArea.style.display = 'block'
+}
+
+async function getCoordData(cidade, apikey){
+
+    const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apikey}`
+
+    let cidadeLat, cidadeLon
+
+    try{
+        const response = await fetch(geoURL)
+        const data = await response.json()
+        
+        console.log(data)
+        console.log(data[0])
+
+        cidadeLat = data[0].lat
+        cidadeLon = data[0].lon
+    } catch (error) {
+        console.error('Erro fetching icon:', error);
+        alert('Error fetching icon. Please try again.')
+    }
+
+    futuraFunçãoForecast(cidadeLat,cidadeLon)
 }
 
 //Events
@@ -133,4 +146,5 @@ searchBtn.addEventListener("click", (e)=> {
     const city = cityInput.value
 
     getWeatherData(city)
+    getCoordData(city,apiKEY)
 })

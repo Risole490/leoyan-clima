@@ -58,6 +58,8 @@
     width: 15%;
 }
 
+/* BANNER STYLING */
+
 .banner-container {
     background-image: url(/Images/beach-1852945_1280.jpg);
     background-repeat: no-repeat;
@@ -89,8 +91,10 @@
     color: white;
 }
 
+/* INPUT STYLING */
+
 .formulario {
-    margin: 3em 0em 1em 0em;
+    margin: 1em 0em;
     box-shadow: 2px 2px 6px;
     padding: 1em;
     border-radius: 4px;
@@ -122,11 +126,12 @@
 }
 
 
-/* WEATHER SECTION */
+/* WEATHER RESULTS SECTION */
 
 .weather-container {
-    padding: 0.5em 5em;
-    background-color: #2F8CCF; 
+    padding: 1em 5em;
+    background-color: #0088ff73;
+    display: none;
 }
 
 .city-info {
@@ -134,12 +139,11 @@
     justify-content: space-between;
     align-items: baseline;
     border-radius: 3px;
-    background-color: #4fb5ff;
 }
 
 .city-name {
     font-size: 38px;
-    color: white;
+    color: whitesmoke;
     font-weight: 700;
 }
 
