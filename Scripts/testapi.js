@@ -116,28 +116,26 @@ async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
     cityWeatherArea.style.display = 'block'
 }
 
-async function getCoordData(cidade, apikey){
+// async function getCoordData(cidade, apikey){
 
-    const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apikey}`
+//     const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apikey}`
 
-    let cidadeLat, cidadeLon
+//     let cidadeLat, cidadeLon
 
-    try{
-        const response = await fetch(geoURL)
-        const data = await response.json()
-        
-        console.log(data)
-        console.log(data[0])
+//     try{
+//         const response = await fetch(geoURL)
+//         const data = await response.json()
 
-        cidadeLat = data[0].lat
-        cidadeLon = data[0].lon
-    } catch (error) {
-        console.error('Erro fetching icon:', error);
-        alert('Error fetching icon. Please try again.')
-    }
+//         cidadeLat = data[0].lat
+//         cidadeLon = data[0].lon
+//     } catch (error) {
+//         console.error('Erro fetching icon:', error);
+//         alert('Error fetching icon. Please try again.')
+//     }
 
-    futuraFunçãoForecast(cidadeLat,cidadeLon)
-}
+//     futuraFunçãoForecast(cidadeLat,cidadeLon)
+// }
+
 
 //Events
 searchBtn.addEventListener("click", (e)=> {
@@ -146,5 +144,5 @@ searchBtn.addEventListener("click", (e)=> {
     const city = cityInput.value
 
     getWeatherData(city)
-    getCoordData(city,apiKEY)
+    // getCoordData(city,apiKEY)
 })
