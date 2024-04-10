@@ -40,18 +40,19 @@ async function getWeatherData(cidade){
         visibi = data.visibility / 1000
         pressure = data.main.pressure
 
-        console.log(condicao,vento,umidade, visibi, pressure)
-        
         }
      catch(error) {
             console.error('Erro fetching current weather data:', error);
             alert('Error fetching current weather data. Please try again.')
         }
 
-    const horarioCidadeFormatado = await timeLocal(cidadeNome)
-    const cidadeIconeClima = await getIconeClima(iconeClima)
+    // const horarioCidadeFormatado = await timeLocal(cidadeNome)
+    // const cidadeIconeClima = await getIconeClima(iconeClima)
+    const indiceArPoluido = await getCoordData(cidadeNome)
+    const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido)
+    console.log(indiceArPoluido,frasePoluicaoDoAr)
     
-    inserirInfosClima(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
+    // inserirInfosClima(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
 }
 
 function converterData(dataCompleta){
@@ -105,6 +106,72 @@ async function getIconeClima(idIcone){
     }
 }
 
+function classificacaoAr(numeroAr){
+    let fraseQualidadeAr = ''
+
+    switch(numeroAr){
+        case 1: 
+            fraseQualidadeAr = 'Ótimo'
+            break;
+        case 2: 
+            fraseQualidadeAr = 'Bom'
+            break
+        case 3: 
+            fraseQualidadeAr = 'Moderado'
+            break
+        case 4:
+            fraseQualidadeAr = 'Ruim'
+            break
+        case 5:
+            fraseQualidadeAr = 'Péssimo'
+            break
+    }
+
+    return fraseQualidadeAr
+}
+
+async function getPollution(lat,lon){
+    if(!lat || !lon){
+        alert('Latitude e Longitude não definidos.')
+        return
+    }
+
+    const poluicaoURL = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKEY}`
+
+    try {
+        const response = await fetch(poluicaoURL)
+        const data = await response.json()
+
+        const indicePoluicao = data.list[0].main.aqi
+        return indicePoluicao
+    } catch (error) {
+        console.error('Erro fetching icon:', error);
+        alert('Error fetching icon. Please try again.')
+    }
+}
+
+async function getCoordData(cidade){
+
+    const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apiKEY}`
+
+    let cidadeLat, cidadeLon
+
+    try{
+        const response = await fetch(geoURL)
+        const data = await response.json()
+
+        cidadeLat = data[0].lat
+        cidadeLon = data[0].lon
+    } catch (error) {
+        console.error('Erro fetching icon:', error);
+        alert('Error fetching icon. Please try again.')
+    }
+
+    const indicePoluicao = await getPollution(cidadeLat,cidadeLon)
+    return indicePoluicao
+}
+
+
 async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
     cityWeatherArea.innerHTML = `
         <div class="city-info">
@@ -125,27 +192,6 @@ async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
     cityWeatherArea.style.display = 'block'
 }
 
-// async function getCoordData(cidade, apikey){
-
-//     const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apikey}`
-
-//     let cidadeLat, cidadeLon
-
-//     try{
-//         const response = await fetch(geoURL)
-//         const data = await response.json()
-
-//         cidadeLat = data[0].lat
-//         cidadeLon = data[0].lon
-//     } catch (error) {
-//         console.error('Erro fetching icon:', error);
-//         alert('Error fetching icon. Please try again.')
-//     }
-
-//     futuraFunçãoForecast(cidadeLat,cidadeLon)
-// }
-
-
 //Events
 searchBtn.addEventListener("click", (e)=> {
     e.preventDefault();
@@ -153,5 +199,5 @@ searchBtn.addEventListener("click", (e)=> {
     const city = cityInput.value
 
     getWeatherData(city)
-    // getCoordData(city,apiKEY)
+    getCoordData(city)
 })
