@@ -5,6 +5,7 @@ const cityInput = document.querySelector('#city-input')
 const searchBtn = document.querySelector('#search')
 
 const cityWeatherArea = document.querySelector('#city-infos-container')
+const detalhesClimaLocal = doument.querySelector('#detalhes-clima-container')
 
 
 //Functions
@@ -46,13 +47,14 @@ async function getWeatherData(cidade){
             alert('Error fetching current weather data. Please try again.')
         }
 
-    // const horarioCidadeFormatado = await timeLocal(cidadeNome)
-    // const cidadeIconeClima = await getIconeClima(iconeClima)
+    const horarioCidadeFormatado = await timeLocal(cidadeNome)
+    const cidadeIconeClima = await getIconeClima(iconeClima)
     const indiceArPoluido = await getCoordData(cidadeNome)
     const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido)
-    console.log(indiceArPoluido,frasePoluicaoDoAr)
     
-    // inserirInfosClima(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
+    
+    inserirInfosClima(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
+    // inserirDetalhesClima();
 }
 
 function converterData(dataCompleta){
@@ -172,6 +174,8 @@ async function getCoordData(cidade){
 }
 
 
+
+
 async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
     cityWeatherArea.innerHTML = `
         <div class="city-info">
@@ -191,6 +195,8 @@ async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
     `
     cityWeatherArea.style.display = 'block'
 }
+
+// async function inserirDetalhesClima(){}
 
 //Events
 searchBtn.addEventListener("click", (e)=> {
