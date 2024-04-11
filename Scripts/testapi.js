@@ -1,17 +1,14 @@
 const apiKEY = '563d3432cd1394d7ff15b978d9aa148e'
 const timeKEY = '174bbe7276ed4359a11f5024026858aa'
 
-const cityInput = document.querySelector('#city-input')
-const searchBtn = document.querySelector('#search')
-
-const cityWeatherArea = document.querySelector('#city-infos-container')
-const detalhesClimaLocal = doument.querySelector('#detalhes-clima-container')
+const cityInput = document.querySelector('#city-input');
+const searchBtn = document.querySelector('#search');
+const cityWeatherArea = document.querySelector('#city-infos-container');
+const detalhesClimaLocal = document.querySelector('#detalhes-clima-container');
 
 
 //Functions
 async function getWeatherData(cidade){
-    let cidadeNome, cidadePais, iconeClima, temperatura, sensacao, condicao, vento, umidade, visibi, pressure
-
     if(!cidade){
         alert('Insira algo no campo de busca!')
         return;
@@ -22,39 +19,37 @@ async function getWeatherData(cidade){
     try{ 
         const response = await fetch(currentWeatherURL)
         const data = await response.json()
-        console.log(data)
 
         if(data.cod === '404'){
             alert('Cidade não encontrada')
             return;
         }
 
-        cidadeNome = data.name
-        cidadePais = data.sys.country
-        iconeClima = data.weather[0].icon
-        temperatura = parseInt(data.main.temp)
-        sensacao = parseInt(data.main.feels_like)
-
-        condicao = data.weather[0].description
-        vento = data.wind.speed
-        umidade = data.main.humidity
-        visibi = data.visibility / 1000
-        pressure = data.main.pressure
-
-        }
-     catch(error) {
-            console.error('Erro fetching current weather data:', error);
-            alert('Error fetching current weather data. Please try again.')
+        const weatherData = {
+            cidadeNome: data.name,
+            cidadePais: data.sys.country,
+            iconeClima: data.weather[0].icon,
+            temperatura: parseInt(data.main.temp),
+            sensacao: parseInt(data.main.feels_like),
+            condicao: data.weather[0].description,
+            vento: data.wind.speed,
+            umidade: data.main.humidity,
+            visibi: data.visibility / 1000,
+            pressure: data.main.pressure
         }
 
-    const horarioCidadeFormatado = await timeLocal(cidadeNome)
-    const cidadeIconeClima = await getIconeClima(iconeClima)
-    const indiceArPoluido = await getCoordData(cidadeNome)
-    const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido)
-    
-    
-    inserirInfosClima(cidadeNome,cidadePais,horarioCidadeFormatado,cidadeIconeClima,temperatura,sensacao)
-    // inserirDetalhesClima();
+        const horarioCidadeFormatado = await timeLocal(weatherData.cidadeNome)
+        const cidadeIconeClima = await getIconeClima(weatherData.iconeClima)
+        // const indiceArPoluido = await getCoordData(weatherData.cidadeNome)
+        // const frasePoluicaoDoAr = classificacaoAr(weatherData.indiceArPoluido)
+        
+        inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao)
+        // inserirDetalhesClima();
+
+    } catch(error) {
+        console.error('Erro fetching current weather data:', error);
+        alert('Error fetching current weather data. Please try again.')
+    }
 }
 
 function converterData(dataCompleta){
@@ -69,25 +64,21 @@ function converterData(dataCompleta){
     return time;
 }
 
-async function timeLocal(cidade){
-    if(!cidade){
-        alert('Sem cidade inserida.')
+async function timeLocal(cidade) {
+    if (!cidade) {
+        alert('Sem cidade inserida.');
         return;
     }
 
-    const timeURL = `https://api.ipgeolocation.io/timezone?apiKey=${timeKEY}&location=${cidade}`
+    const timeURL = `https://api.ipgeolocation.io/timezone?apiKey=${timeKEY}&location=${cidade}`;
 
-    try{ 
-        const response = await fetch(timeURL)
-        const data = await response.json()
-        const dataCompletaCidade = data.date_time_txt
-        const dataConvertida = converterData(dataCompletaCidade)
-        return dataConvertida
-        }
-    catch(error) {
-            console.error('Erro fetching current date:', error);
-            alert('Error fetching current date. Please try again.')
-        }
+    try {
+        const { date_time_txt } = await fetch(timeURL).then(response => response.json());
+        return converterData(date_time_txt);
+    } catch (error) {
+        console.error('Erro fetching current date:', error);
+        alert('Error fetching current date. Please try again.');
+    }
 }
 
 async function getIconeClima(idIcone){
