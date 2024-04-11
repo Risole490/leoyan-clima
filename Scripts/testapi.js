@@ -40,10 +40,10 @@ async function getWeatherData(cidade){
         const horarioCidadeFormatado = await timeLocal(weatherData.cidadeNome)
         const cidadeIconeClima = await getIconeClima(weatherData.iconeClima)
         const indiceArPoluido = await getCoordData(weatherData.cidadeNome)
-        const frasePoluicaoDoAr = classificacaoAr(weatherData.indiceArPoluido)
+        const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido)
         
         inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao, weatherData.condicao)
-        inserirDetalhesClima(weatherData.condicao,weatherData.vento,weatherData.umidade,weatherData.visibi,weatherData.pressure,indiceArPoluido);
+        inserirDetalhesClima(weatherData.condicao,weatherData.vento,weatherData.umidade,weatherData.visibi,weatherData.pressure,indiceArPoluido,frasePoluicaoDoAr);
 
     } catch(error) {
         console.error('Erro fetching current weather data:', error);
@@ -179,7 +179,7 @@ async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
     `
 }
 
-async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade, pressao, ar){
+async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade, pressao, ar, fraseAr){
     const detailsWeatherArea = document.querySelector('#detalhes-clima-container');
 
     detailsWeatherArea.innerHTML = `
@@ -198,7 +198,7 @@ async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade,
                             ${pressao} mb
                         </p>
                         <p class="weather-conditions-details-item">Qualidade do ar <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                            ${ar}
+                            ${ar} &nbsp;&nbsp;(${fraseAr})
                         </p>
                         <p class="weather-conditions-details-item">Alertas?? <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
                             22°C
