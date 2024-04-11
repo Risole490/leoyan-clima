@@ -5,13 +5,14 @@ const timeKEY = '174bbe7276ed4359a11f5024026858aa'
 const cityInput = document.querySelector('#city-input');
 const searchBtn = document.querySelector('#search');
 const cityWeatherArea = document.querySelector('#city-infos-container');
-const detalhesClimaLocal = document.querySelector('#detalhes-clima-container');
+const errorMessageDiv = document.querySelector('#error-message')
+
 
 
 //Functions
 async function getWeatherData(cidade){
     if(!cidade){
-        alert('Insira algo no campo de busca!')
+        errorMessageDiv.innerHTML = 'Por favor, insira uma cidade.'
         return;
     }
 
@@ -22,8 +23,7 @@ async function getWeatherData(cidade){
         const data = await response.json()
 
         if(data.cod === '404'){
-            alert('Cidade não encontrada')
-            return;
+            throw new Error('Cidade não encontrada');
         }
 
         const weatherData = {
@@ -44,12 +44,12 @@ async function getWeatherData(cidade){
         const indiceArPoluido = await getCoordData(weatherData.cidadeNome)
         const frasePoluicaoDoAr = classificacaoAr(weatherData.indiceArPoluido)
         
-        inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao)
-        // inserirDetalhesClima(indiceArPoluido,frasePoluicaoDoAr);
+        inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao, weatherData.condicao)
+        inserirDetalhesClima(weatherData.condicao,weatherData.vento,weatherData.umidade,weatherData.visibi,weatherData.pressure,indiceArPoluido);
 
     } catch(error) {
         console.error('Erro fetching current weather data:', error);
-        alert('Error fetching current weather data. Please try again.')
+        errorMessageDiv.textContent = error.message;
     }
 }
 
@@ -66,11 +66,6 @@ function converterData(dataCompleta){
 }
 
 async function timeLocal(cidade) {
-    if (!cidade) {
-        alert('Sem cidade inserida.');
-        return;
-    }
-
     const timeURL = `https://api.ipgeolocation.io/timezone?apiKey=${timeKEY}&location=${cidade}`;
 
     try {
@@ -78,16 +73,10 @@ async function timeLocal(cidade) {
         return converterData(date_time_txt);
     } catch (error) {
         console.error('Erro fetching current date:', error);
-        alert('Error fetching current date. Please try again.');
     }
 }
 
 async function getIconeClima(idIcone){
-    if(!idIcone){
-        alert('Ícone não disponível.');
-        return
-    }
-
     const iconeURL = `https://openweathermap.org/img/wn/${idIcone}@2x.png`;
 
     try {
@@ -96,8 +85,7 @@ async function getIconeClima(idIcone){
         return iconePNG;
     } catch (error) {
         console.error('Erro fetching icon:', error);
-        alert('Error fetching icon. Please try again.');
-        throw error;
+        errorMessageDiv.textContent += error.message
     }
 }
 
@@ -127,7 +115,7 @@ function classificacaoAr(numeroAr){
 
 async function getPollution(lat,lon){
     if(!lat || !lon){
-        alert('Latitude e Longitude não definidos.')
+        errorMessageDiv.textContent += 'Erro ao obter coordenadas.'
         return
     }
 
@@ -141,7 +129,6 @@ async function getPollution(lat,lon){
         return indicePoluicao
     } catch (error) {
         console.error('Erro fetching icon:', error);
-        alert('Error fetching icon. Please try again.')
     }
 }
 
@@ -153,6 +140,7 @@ async function getCoordData(cidade){
         if(!response.ok){
             throw new Error(`Erro no HTTP! Status: ${response.status}`);
         }
+
         const data = await response.json()
 
         if(!data[0] || !data[0].lat || !data[0].lon){
@@ -165,7 +153,6 @@ async function getCoordData(cidade){
         return indicePoluicao
     } catch (error) {
         console.error('Error fetching coords:', error);
-        alert('Error fetching coords. Please try again.')
     }
 }
 
@@ -187,15 +174,46 @@ async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
                 <h1 class="weather-temperatura">${temp}°C</h1>
                 <h2 class="weather-sensacao">Sensação de ${sens}°C</h2>
             </div>
+        
+            <div class="weather-conditions-container" id="detalhes-clima-container">
+            </div>
         </div>
     `
+}
+
+async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade, pressao, ar){
+    const detailsWeatherArea = document.querySelector('#detalhes-clima-container');
+
+    detailsWeatherArea.innerHTML = `
+        <h2 class="weather-condition">${condicaoClima}</h2>
+            <div class="weather-conditions-details">
+                        <p class="weather-conditions-details-item">Vento <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+                        ${vento} km/h
+                        </p>
+                        <p class="weather-conditions-details-item">Umidade <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+                            ${umidade}%
+                        </p>
+                        <p class="weather-conditions-details-item">Visibilidade <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+                            ${visibilidade} km
+                        </p>
+                        <p class="weather-conditions-details-item">Pressão <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+                            ${pressao} mb
+                        </p>
+                        <p class="weather-conditions-details-item">Qualidade do ar <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+                            ${ar}
+                        </p>
+                        <p class="weather-conditions-details-item">Alertas?? <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+                            22°C
+                        </p>
+                </div>
+    `
+
     cityWeatherArea.style.display = 'block'
 }
 
-// async function inserirDetalhesClima(){}
-
 //Events
 searchBtn.addEventListener("click", (e)=> {
+    errorMessageDiv.innerHTML = '';
     e.preventDefault();
 
     const city = cityInput.value
