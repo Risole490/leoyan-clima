@@ -1,3 +1,4 @@
+(()=> {
 const apiKEY = '563d3432cd1394d7ff15b978d9aa148e'
 const timeKEY = '174bbe7276ed4359a11f5024026858aa'
 
@@ -40,11 +41,11 @@ async function getWeatherData(cidade){
 
         const horarioCidadeFormatado = await timeLocal(weatherData.cidadeNome)
         const cidadeIconeClima = await getIconeClima(weatherData.iconeClima)
-        // const indiceArPoluido = await getCoordData(weatherData.cidadeNome)
-        // const frasePoluicaoDoAr = classificacaoAr(weatherData.indiceArPoluido)
+        const indiceArPoluido = await getCoordData(weatherData.cidadeNome)
+        const frasePoluicaoDoAr = classificacaoAr(weatherData.indiceArPoluido)
         
         inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao)
-        // inserirDetalhesClima();
+        // inserirDetalhesClima(indiceArPoluido,frasePoluicaoDoAr);
 
     } catch(error) {
         console.error('Erro fetching current weather data:', error);
@@ -83,19 +84,20 @@ async function timeLocal(cidade) {
 
 async function getIconeClima(idIcone){
     if(!idIcone){
-        alert('Ícone não disponível.')
+        alert('Ícone não disponível.');
         return
     }
 
-    const iconeURL = `https://openweathermap.org/img/wn/${idIcone}@2x.png`
+    const iconeURL = `https://openweathermap.org/img/wn/${idIcone}@2x.png`;
 
     try {
-        const response = await fetch(iconeURL)
-        const iconePNG = response.url
-        return iconePNG
+        const response = await fetch(iconeURL);
+        const iconePNG = response.url;
+        return iconePNG;
     } catch (error) {
         console.error('Erro fetching icon:', error);
-        alert('Error fetching icon. Please try again.')
+        alert('Error fetching icon. Please try again.');
+        throw error;
     }
 }
 
@@ -144,24 +146,27 @@ async function getPollution(lat,lon){
 }
 
 async function getCoordData(cidade){
-
     const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apiKEY}`
-
-    let cidadeLat, cidadeLon
 
     try{
         const response = await fetch(geoURL)
+        if(!response.ok){
+            throw new Error(`Erro no HTTP! Status: ${response.status}`);
+        }
         const data = await response.json()
 
-        cidadeLat = data[0].lat
-        cidadeLon = data[0].lon
-    } catch (error) {
-        console.error('Erro fetching icon:', error);
-        alert('Error fetching icon. Please try again.')
-    }
+        if(!data[0] || !data[0].lat || !data[0].lon){
+            throw new Error('Dados inválidos na API.');
+        }
+        const cidadeLat = data[0].lat
+        const cidadeLon = data[0].lon
 
-    const indicePoluicao = await getPollution(cidadeLat,cidadeLon)
-    return indicePoluicao
+        const indicePoluicao = await getPollution(cidadeLat,cidadeLon)
+        return indicePoluicao
+    } catch (error) {
+        console.error('Error fetching coords:', error);
+        alert('Error fetching coords. Please try again.')
+    }
 }
 
 
@@ -198,3 +203,5 @@ searchBtn.addEventListener("click", (e)=> {
     getWeatherData(city)
     getCoordData(city)
 })
+
+})();
