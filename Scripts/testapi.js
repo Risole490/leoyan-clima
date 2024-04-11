@@ -30,7 +30,7 @@ async function getWeatherData(cidade){
             iconeClima: data.weather[0].icon,
             temperatura: parseInt(data.main.temp),
             sensacao: parseInt(data.main.feels_like),
-            condicao: data.weather[0].description,
+            condicao: primeiraLetraMaiuscula(data.weather[0].description),
             vento: data.wind.speed,
             umidade: data.main.humidity,
             visibi: data.visibility / 1000,
@@ -49,6 +49,10 @@ async function getWeatherData(cidade){
         console.error('Erro fetching current weather data:', error);
         errorMessageDiv.textContent = error.message;
     }
+}
+
+function primeiraLetraMaiuscula(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function converterData(dataCompleta){
@@ -184,26 +188,23 @@ async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade,
 
     detailsWeatherArea.innerHTML = `
         <h2 class="weather-condition">${condicaoClima}</h2>
-            <div class="weather-conditions-details">
-                        <p class="weather-conditions-details-item">Vento <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                        ${vento} km/h
-                        </p>
-                        <p class="weather-conditions-details-item">Umidade <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                            ${umidade}%
-                        </p>
-                        <p class="weather-conditions-details-item">Visibilidade <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                            ${visibilidade} km
-                        </p>
-                        <p class="weather-conditions-details-item">Pressão <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                            ${pressao} mb
-                        </p>
-                        <p class="weather-conditions-details-item">Qualidade do ar <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                            ${ar} &nbsp;&nbsp;(${fraseAr})
-                        </p>
-                        <p class="weather-conditions-details-item">Alertas?? <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
-                            22°C
-                        </p>
-                </div>
+        <div class="weather-conditions-details">
+        <p class="weather-conditions-details-item">Vento <i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+           ${vento} km/h
+        </p>
+        <p class="weather-conditions-details-item">Humidade <span class="texto-hover vento">Indica a quantidade total de água em estado gasoso presente na atmosfera.</span><i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+        ${umidade}%
+        </p> 
+        <p class="weather-conditions-details-item">Visibilidade <span class="texto-hover vento">Distância máxima que se pode ver com clareza em uma direção horizontal</span><i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+            ${visibilidade} km
+        </p>
+        <p class="weather-conditions-details-item">Pressão <span class="texto-hover vento">O peso do ar na atmosfera.</span><i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+            ${pressao} mb
+        </p>
+        <p class="weather-conditions-details-item">Qualidade do ar <em class="texto-hover vento">Afetado pela presença de gases poluentes.</em><i class="fa-solid fa-circle-info fa-xs" style="color: #ffffff;"></i><br><br>
+            ${ar} - ${fraseAr}
+        </p>
+    </div>
     `
 
     cityWeatherArea.style.display = 'block'
