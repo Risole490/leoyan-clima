@@ -7,7 +7,6 @@ const searchBtn = document.querySelector('#search');
 const cityWeatherArea = document.querySelector('#city-infos-container');
 const errorMessageDiv = document.querySelector('#error-message')
 
-
 //Functions
 async function getWeatherData(cidade){
     if(!cidade){
