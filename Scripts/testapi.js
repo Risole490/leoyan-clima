@@ -43,7 +43,7 @@ async function getWeatherData(cidade){
         const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido)
         
         inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao, weatherData.condicao)
-        inserirDetalhesClima(weatherData.condicao,weatherData.vento,weatherData.umidade,weatherData.visibi,weatherData.pressure,indiceArPoluido,frasePoluicaoDoAr);
+        inserirDetalhesClima(weatherData.condicao,weatherData.vento,weatherData.umidade,weatherData.visibi,weatherData.pressure,indiceArPoluido.indicePoluicao,frasePoluicaoDoAr);
 
     } catch(error) {
         console.error('Erro fetching current weather data:', error);
@@ -152,9 +152,43 @@ async function getCoordData(cidade){
         const cidadeLon = data[0].lon
 
         const indicePoluicao = await getPollution(cidadeLat,cidadeLon)
-        return indicePoluicao
+        return {cidadeLat, cidadeLon, indicePoluicao}
     } catch (error) {
         console.error('Error fetching coords:', error);
+    }
+}
+
+function converterDia(dataCompleta){
+    const a = new Date(dataCompleta)
+    const dias = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+    const dia = dias[a.getDay()];
+    return dia;
+}
+
+async function getForecast(lat,lon){
+    if(!lat || !lon){
+        errorMessageDiv.textContent += 'Erro ao obter coordenadas.'
+        return
+    }
+
+    const forecastURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&lang=pt_br&appid=${apiKEY}`
+
+    try {
+        const response = await fetch(forecastURL)
+        const data = await response.json()
+        const diaTxt = data.list[2].dt_txt
+        const dataTxt1 = data.list[10].dt_txt
+        const dataTxt2 = data.list[18].dt_txt
+        const dataTxt3 = data.list[26].dt_txt
+        const dataTxt4 = data.list[34].dt_txt
+
+        console.log(diaTxt)
+        const diaExato = converterDia(diaTxt)
+        console.log(diaExato)
+
+
+    } catch (error) {
+        console.error('Erro fetching forecast:', error);
     }
 }
 
@@ -211,14 +245,18 @@ async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade,
 }
 
 //Events
-searchBtn.addEventListener("click", (e)=> {
+searchBtn.addEventListener("click", async (e)=> {
     errorMessageDiv.innerHTML = '';
     e.preventDefault();
 
     const city = cityInput.value
 
-    getWeatherData(city)
-    getCoordData(city)
+    // getWeatherData(city)
+    const coordData = await getCoordData(city)
+    getForecast(coordData.cidadeLat,coordData.cidadeLon)
+    
+
+    
 })
 
 })();
