@@ -40,7 +40,7 @@ async function getWeatherData(cidade){
         const horarioCidadeFormatado = await timeLocal(weatherData.cidadeNome)
         const cidadeIconeClima = await getIconeClima(weatherData.iconeClima)
         const indiceArPoluido = await getCoordData(weatherData.cidadeNome)
-        const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido)
+        const frasePoluicaoDoAr = classificacaoAr(indiceArPoluido.indicePoluicao)
         
         inserirInfosClima(weatherData.cidadeNome,weatherData.cidadePais,horarioCidadeFormatado,cidadeIconeClima,weatherData.temperatura,weatherData.sensacao, weatherData.condicao)
         inserirDetalhesClima(weatherData.condicao,weatherData.vento,weatherData.umidade,weatherData.visibi,weatherData.pressure,indiceArPoluido.indicePoluicao,frasePoluicaoDoAr);
@@ -126,6 +126,7 @@ async function getPollution(lat,lon){
     try {
         const response = await fetch(poluicaoURL)
         const data = await response.json()
+        console.log(data)
 
         const indicePoluicao = data.list[0].main.aqi
         return indicePoluicao
@@ -144,7 +145,7 @@ async function getCoordData(cidade){
         }
 
         const data = await response.json()
-
+        
         if(!data[0] || !data[0].lat || !data[0].lon){
             throw new Error('Dados inválidos na API.');
         }
@@ -182,10 +183,7 @@ async function getForecast(lat,lon){
         const dataTxt3 = data.list[26].dt_txt
         const dataTxt4 = data.list[34].dt_txt
 
-        console.log(diaTxt)
         const diaExato = converterDia(diaTxt)
-        console.log(diaExato)
-
 
     } catch (error) {
         console.error('Erro fetching forecast:', error);
@@ -251,7 +249,7 @@ searchBtn.addEventListener("click", async (e)=> {
 
     const city = cityInput.value
 
-    // getWeatherData(city)
+    getWeatherData(city)
     const coordData = await getCoordData(city)
     getForecast(coordData.cidadeLat,coordData.cidadeLon)
     
