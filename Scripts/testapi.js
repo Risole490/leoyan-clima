@@ -145,7 +145,7 @@ async function getCoordData(cidade){
         }
 
         const data = await response.json()
-        
+
         if(!data[0] || !data[0].lat || !data[0].lon){
             throw new Error('Dados inválidos na API.');
         }
@@ -177,6 +177,8 @@ async function getForecast(lat,lon){
     try {
         const response = await fetch(forecastURL)
         const data = await response.json()
+
+        console.log(data)
         const diaTxt = data.list[2].dt_txt
         const dataTxt1 = data.list[10].dt_txt
         const dataTxt2 = data.list[18].dt_txt
@@ -252,8 +254,6 @@ searchBtn.addEventListener("click", async (e)=> {
     getWeatherData(city)
     const coordData = await getCoordData(city)
     getForecast(coordData.cidadeLat,coordData.cidadeLon)
-    
-
     
 })
 

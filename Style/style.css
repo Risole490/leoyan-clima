@@ -131,7 +131,7 @@
 .weather-container {
     padding: 1em 5em;
     background-color: #0088ff73;
-    display: none;
+    display: block;
 }
 
 .city-info {
@@ -205,4 +205,57 @@
     padding: 10px;
     color: rgb(255, 255, 255);
     border-radius: 3px;
+}
+
+/* FORECAST STYLING */
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    padding: 2em 5em;
+    border: 1px solid;
+    background-color: #0088ff73;
+}
+
+.forecast-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+.forecast-cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+}
+
+.forecast-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 2px 2px 6px;
+}
+
+.forecast-card-day {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.forecast-card-max  {
+    font-size: 18px;
+}
+
+.chuva-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgb(87, 87, 255);
 }
