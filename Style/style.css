@@ -1,3 +1,5 @@
+/* HEADER STYLING */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -5,6 +7,8 @@
     padding: 0.5em 3em;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
 }
+
+/* MENU HAMBURGER STYLE*/
 
 .menu-hamburger {
     text-decoration: none;
@@ -89,6 +93,7 @@
 .banner-description {
     font-size: 22px;
     color: white;
+    text-shadow: 2px 2px 4px black;
 }
 
 /* INPUT STYLING */
@@ -248,24 +253,28 @@
     gap: 1em;
     padding: 1em;
     border-radius: 3px;
-    background-color: white;
+    background-color: none;
     box-shadow: 2px 2px 6px;
 }
 
-.forecast-card-day {
+.forecast-card-date {
     font-size: 24px;
     font-weight: 700;
+}
+
+.forecast-card-icon {
+    width: 80px;
 }
 
 .forecast-card-condicao {
     font-size: 18px;
 }
 
-.forecast-card-max  {
+.forecast-card-temps {
     font-size: 18px;
 }
 
-.chuva-text {
+.forecast-card-chuva {
     font-size: 14px;
     font-weight: 700;
     color: rgb(87, 87, 255);
