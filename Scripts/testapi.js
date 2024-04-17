@@ -126,7 +126,6 @@ async function getPollution(lat,lon){
     try {
         const response = await fetch(poluicaoURL)
         const data = await response.json()
-        console.log(data)
 
         const indicePoluicao = data.list[0].main.aqi
         return indicePoluicao
@@ -162,8 +161,10 @@ async function getCoordData(cidade){
 function converterDia(dataCompleta){
     const a = new Date(dataCompleta)
     const dias = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-    const dia = dias[a.getDay()];
-    return dia;
+    const diaSemana = dias[a.getDay()];
+    const dia = a.getDate();
+    const mes = a.getMonth() + 1;
+    return `${diaSemana} - ${dia}/${mes}`;
 }
 
 async function getForecast(lat,lon){
@@ -179,13 +180,14 @@ async function getForecast(lat,lon){
         const data = await response.json()
 
         console.log(data)
-        const diaTxt = data.list[2].dt_txt
-        const dataTxt1 = data.list[10].dt_txt
-        const dataTxt2 = data.list[18].dt_txt
-        const dataTxt3 = data.list[26].dt_txt
-        const dataTxt4 = data.list[34].dt_txt
-
-        const diaExato = converterDia(diaTxt)
+        const datas = [
+            converterDia(data.list[2].dt_txt),
+            converterDia(data.list[10].dt_txt),
+            converterDia(data.list[18].dt_txt),
+            converterDia(data.list[26].dt_txt),
+            converterDia(data.list[34].dt_txt)
+        ]
+        console.log(datas)
 
     } catch (error) {
         console.error('Erro fetching forecast:', error);
