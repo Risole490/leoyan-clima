@@ -121,7 +121,7 @@ async function getPollution(lat,lon){
         return
     }
 
-    const poluicaoURL = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKEY}`
+    const poluicaoURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKEY}`
 
     try {
         const response = await fetch(poluicaoURL)
@@ -135,7 +135,7 @@ async function getPollution(lat,lon){
 }
 
 async function getCoordData(cidade){
-    const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apiKEY}`
+    const geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cidade}&limit=2&appid=${apiKEY}`
 
     try{
         const response = await fetch(geoURL)
@@ -173,7 +173,7 @@ async function getForecast(lat,lon){
         return
     }
 
-    const forecastURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&lang=pt_br&units=metric&appid=${apiKEY}`
+    const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&lang=pt_br&units=metric&appid=${apiKEY}`
 
     try {
         const response = await fetch(forecastURL)
