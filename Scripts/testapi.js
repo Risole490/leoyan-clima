@@ -187,7 +187,14 @@ async function getForecast(lat,lon){
             converterDia(data.list[26].dt_txt),
             converterDia(data.list[34].dt_txt)
         ]
-        console.log(datas)
+        
+        const icones = [
+            await getIconeClima(data.list[2].weather[0].icon),
+            await getIconeClima(data.list[10].weather[0].icon),
+            await getIconeClima(data.list[18].weather[0].icon),
+            await getIconeClima(data.list[26].weather[0].icon),
+            await getIconeClima(data.list[34].weather[0].icon)
+        ];
 
     } catch (error) {
         console.error('Erro fetching forecast:', error);
