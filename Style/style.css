@@ -227,6 +227,13 @@
     text-shadow: 2px 2px 4px black;
 }
 
+.forecast-title-obs {
+    font-size: 24px;
+    color: grey;
+    font-size: 18px;
+    font-style: italic;
+}
+
 .forecast-cards-container {
     display: flex;
     justify-content: center;
@@ -248,6 +255,10 @@
 .forecast-card-day {
     font-size: 24px;
     font-weight: 700;
+}
+
+.forecast-card-condicao {
+    font-size: 18px;
 }
 
 .forecast-card-max  {

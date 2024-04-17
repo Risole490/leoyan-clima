@@ -173,7 +173,7 @@ async function getForecast(lat,lon){
         return
     }
 
-    const forecastURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&lang=pt_br&appid=${apiKEY}`
+    const forecastURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&lang=pt_br&units=metric&appid=${apiKEY}`
 
     try {
         const response = await fetch(forecastURL)
@@ -195,6 +195,40 @@ async function getForecast(lat,lon){
             await getIconeClima(data.list[26].weather[0].icon),
             await getIconeClima(data.list[34].weather[0].icon)
         ];
+
+        const tempsMax = [
+            parseInt(data.list[2].main.temp_max),
+            parseInt(data.list[10].main.temp_max),
+            parseInt(data.list[18].main.temp_max),
+            parseInt(data.list[26].main.temp_max),
+            parseInt(data.list[34].main.temp_max)
+        ];
+
+        const tempsMin = [
+            parseInt(data.list[2].main.temp_min),
+            parseInt(data.list[10].main.temp_min),
+            parseInt(data.list[18].main.temp_min),
+            parseInt(data.list[26].main.temp_min),
+            parseInt(data.list[34].main.temp_min)
+        ];
+
+        const chanceChuva = [
+            `${data.list[2].pop*100}%`,
+            `${data.list[10].pop*100}%`,
+            `${data.list[18].pop*100}%`,
+            `${data.list[26].pop*100}%`,
+            `${data.list[34].pop*100}%`
+        ];
+
+        const condicoes = [
+            primeiraLetraMaiuscula(data.list[2].weather[0].description),
+            primeiraLetraMaiuscula(data.list[10].weather[0].description),
+            primeiraLetraMaiuscula(data.list[18].weather[0].description),
+            primeiraLetraMaiuscula(data.list[26].weather[0].description),
+            primeiraLetraMaiuscula(data.list[34].weather[0].description)
+        ];
+
+        console.log(condicoes)
 
     } catch (error) {
         console.error('Erro fetching forecast:', error);
