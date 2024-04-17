@@ -269,6 +269,7 @@ async function getForecast(lat,lon){
                 </div>
             </div>
         `
+        forecastArea.style.display = 'flex'
 
     } catch (error) {
         console.error('Erro fetching forecast:', error);
@@ -298,6 +299,8 @@ async function inserirInfosClima(cidade,pais,data,icone,temp,sens){
             </div>
         </div>
     `
+
+    cityWeatherArea.style.display = 'block'
 }
 
 async function inserirDetalhesClima(condicaoClima, vento, umidade, visibilidade, pressao, ar, fraseAr){

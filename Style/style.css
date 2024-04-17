@@ -136,7 +136,7 @@
 .weather-container {
     padding: 1em 5em;
     background-color: #0088ff73;
-    display: block;
+    display: none;
 }
 
 .city-info {
@@ -215,7 +215,7 @@
 /* FORECAST STYLING */
 
 .forecast-container {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
