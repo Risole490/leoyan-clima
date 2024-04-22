@@ -23,6 +23,7 @@
 .header-title {
     font-size: 36px;
     font-weight: bold;
+    font-family: 'Rubik', sans-serif;
 }
 
 .bandeira-lang {
@@ -42,6 +43,7 @@
     transition: 0.5s;
     padding: 1em 0em;
     box-shadow: 2px 2px 10px grey;
+    background-color: white;
 }
 
 .sidepanel-link {
@@ -51,6 +53,7 @@
     gap: 20px;
     text-decoration: none;
     font-size: 22px;
+    font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     width: 200px;
     text-align: center;
@@ -88,12 +91,14 @@
     font-size: 60px;
     font-weight: bold;
     color: white;
+    font-family: 'Rubik', sans-serif;
 }
 
 .banner-description {
     font-size: 22px;
     color: white;
     text-shadow: 2px 2px 4px black;
+    font-family: 'Mulish', sans-serif;
 }
 
 /* INPUT STYLING */
@@ -135,7 +140,7 @@
 
 .weather-container {
     padding: 1em 5em;
-    background-color: #0088ff73;
+    background-color: #3c8cd2cf;
     display: none;
 }
 
@@ -148,33 +153,47 @@
 
 .city-name {
     font-size: 38px;
+    text-shadow: 2px 2px 4px black;
+    font-family: 'Rubik', sans-serif;
     color: whitesmoke;
     font-weight: 700;
+    font-family: 'Rubik', sans-serif;
 }
 
 .city-date {
     color: white;
-    font-size: 30px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
     font-weight: 700;
+    text-shadow: 2px 2px 4px black;
 }
 
 .city-weather-infos {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2em;
+    margin: 2em 7em;
+    padding: 1em 0;
+    box-shadow: 3px 3px 6px;
+    border-radius: 3px;
 }
 
 .icone-clima{
-    width: 120px;
+    width: 130px;
 }
 
 .weather-temperatura {
     font-size: 64px;
+    font-family: 'Mulish', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px black;
 }
 
 .weather-sensacao {
     font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px black;
 }
 
 /* DETALHES DO CLIMA */
@@ -189,11 +208,19 @@
     font-size: 32px;
     margin: 0em 0em 1em 0em;
     font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    color: wheat;
 }
 
 .weather-conditions-details {
     display: flex;
+    justify-content: space-around;
     gap: 2em;
+}
+
+.weather-conditions-details-item {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
 }
 
 .weather-conditions-details-item:hover .texto-hover{
@@ -221,13 +248,13 @@
     align-items: center;
     gap: 2em;
     padding: 2em 5em;
-    border: 1px solid;
     background-color: #0088ff73;
 }
 
 .forecast-title {
     font-size: 36px;
     font-weight: 700;
+    font-family: 'Rubik', sans-serif;
     color: white;
     text-shadow: 2px 2px 4px black;
 }
@@ -253,29 +280,35 @@
     gap: 1em;
     padding: 1em;
     border-radius: 3px;
-    background-color: none;
+    background-color: #3c8cd2cf;
     box-shadow: 2px 2px 6px;
 }
 
 .forecast-card-date {
     font-size: 24px;
     font-weight: 700;
+    font-family: 'Rubik', sans-serif;
 }
 
 .forecast-card-icon {
-    width: 80px;
+    width: 110px;
 }
 
 .forecast-card-condicao {
     font-size: 18px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    color: wheat;
 }
 
 .forecast-card-temps {
     font-size: 18px;
+    font-family: 'Mulish', sans-serif;
 }
 
 .forecast-card-chuva {
     font-size: 14px;
     font-weight: 700;
-    color: rgb(87, 87, 255);
+    font-family: 'Roboto', sans-serif;
+    color: white;
 }

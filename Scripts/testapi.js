@@ -61,9 +61,9 @@ function converterData(dataCompleta){
     const year = a.getFullYear();
     const month = months[a.getMonth()];
     const date = a.getDate()
-    const hour = a.getHours()
-    const min = a.getMinutes()
-    const time = date + ' ' + month + ' ' + year + ' ' + hour + 'h' + min;
+    const hour = a.getHours().toString().padStart(2,'0');
+    const min = a.getMinutes().toString().padStart(2,'0');
+    const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min;
     return time;
 }
 
