@@ -1,3 +1,10 @@
+/* GENERAL STYLING */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 /* HEADER STYLING */
 
 .header {
@@ -41,8 +48,8 @@
     border-radius: 2px;
     overflow-x: hidden;
     transition: 0.5s;
-    padding: 1em 0em;
-    box-shadow: 2px 2px 10px grey;
+    padding-top: 0.5em;
+    box-shadow: 2px 2px 6px;
     background-color: white;
 }
 
@@ -55,14 +62,20 @@
     font-size: 22px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
-    width: 200px;
+    width: 195px;
     text-align: center;
     padding: 1em;
     color: black;
 }
 
-.pokeball {
-    width: 15%;
+.sidepanel-link:nth-last-child(-n+2){
+    color: rgba(128, 128, 128, 0.5);
+    background-color: rgba(128, 128, 128, 0.461);
+}
+
+.sidepanel-link-icon {
+    display: none;
+    width: 35px;
 }
 
 /* BANNER STYLING */
@@ -311,4 +324,20 @@
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
     color: white;
+}
+
+/* FOOTER STYLING */
+
+.footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: white;
+    color: black;
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
 }
