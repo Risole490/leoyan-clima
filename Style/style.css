@@ -44,33 +44,30 @@ body {
 }
 
 .sidepanel {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
     position: fixed;
-    width: 0px;
-    top: 20;
-    left: 0;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
     border-radius: 2px;
     overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 0.5em;
     box-shadow: 2px 2px 6px;
     background-color: var(--cor-branca);
 }
 
+.sidepanel-active {
+    opacity: 1;
+    transition: opacity 0.5s, visibility 0.5s;
+    visibility: visible;
+}
+
 .sidepanel-link {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
+    column-gap: 15px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 24px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
-    width: 195px;
-    text-align: center;
-    padding: 1em;
+    padding: 0.5em 1.5em;
     color: var(--cor-preta);
 }
 

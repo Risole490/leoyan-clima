@@ -1,4 +1,5 @@
 @media (max-width: 600px){
+    /* HEADER STYLING */
     .header {
         padding: 0.5em;
     }
@@ -9,6 +10,15 @@
 
     .menu-hamburger {
         padding: 0.5em;
-        font-size: 14px;
+        font-size: 15px;
+    }
+
+    .bandeira-lang {
+        width: 35px;
+    }
+
+    .sidepanel-link {
+        font-size: 16px;
+        
     }
 }
