@@ -17,8 +17,98 @@
         width: 35px;
     }
 
+    /* SIDEPANEL STYLING */
     .sidepanel-link {
-        font-size: 16px;
-        
+        font-size: 18px;
+        padding-left: 0.5em;
     }
+
+    .sidepanel-link:nth-last-child(-n+2){
+        cursor: not-allowed;
+    }
+
+    /* BANNER STYLING */
+
+    .banner-container {
+        padding: 0.5em;
+    }
+
+    .banner-title {
+        font-size: 46px;
+        text-shadow: 2px 2px 4px var(--cor-preta);
+    }
+
+    .banner-description {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    /* INPUT STYLING */
+
+    .formulario {
+        margin: 0.5em;
+    }
+
+    /* WEATHER RESULTS STYLING */
+
+    .weather-container {
+        padding: 0.5em;
+    }
+
+    .city-info {
+        align-items: center;
+    }
+
+    .city-name {
+        font-size: 24px;
+    }
+
+    .city-date {
+        font-size: 18px;
+    }
+
+    .city-weather-infos {
+        margin: 1em 0.5em;
+    }
+
+    .icone-clima {
+        width: 100px;
+    }
+
+    .weater-temps-container {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+    }
+
+    .weather-temperatura {
+        font-size: 24px;
+    }
+
+    .weather-sensacao {
+        font-size: 16px;
+    }
+
+    /* WEATHER DETAILS STYLING */
+
+    .weather-conditions-container {
+        margin-left: 1em;
+    }
+
+    .weather-condition {
+        font-size: 22px;
+        margin-bottom: 0.5em;
+    }
+
+    .weather-conditions-details{
+        font-size: 12px;
+        padding-right: 1em;
+        gap: 1em;
+    }
+
+    .fa-circle-info {
+        display: none;
+    }
+
+
 }

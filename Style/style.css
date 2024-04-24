@@ -61,6 +61,7 @@ body {
 }
 
 .sidepanel-link {
+    cursor: pointer;
     display: flex;
     column-gap: 15px;
     text-decoration: none;
@@ -71,9 +72,15 @@ body {
     color: var(--cor-preta);
 }
 
+.sidepanel-link:hover {
+    background-color: var(--cor-azul-escuro);
+    color: var(--cor-branca);
+}
+
 .sidepanel-link:nth-last-child(-n+2){
     color: rgba(128, 128, 128, 0.5);
     background-color: rgba(128, 128, 128, 0.461);
+    cursor: not-allowed;
 }
 
 .sidepanel-link-icon {
