@@ -231,6 +231,8 @@ async function getForecast(lat,lon){
 
         forecastArea.innerHTML = `
             <h2 class="forecast-title">Previsão para os próximos dias</h2>
+            <h4 class="forecast-title-obs">(Baseado no momento atual de pesquisa)</h4>
+
             <div class="forecast-cards-container">
                 <div class="forecast-card">
                     <h3 class="forecast-card-date">${datas[0]}</h3>
