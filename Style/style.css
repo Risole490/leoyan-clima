@@ -94,7 +94,7 @@ body {
     background-image: url(/Images/beach-1852945_1280.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 2em 2em 0em 2em;
+    padding: 1.5em 2em 0em 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,6 +115,7 @@ body {
     font-weight: bold;
     color: var(--cor-branca);
     font-family: 'Rubik', sans-serif;
+    text-shadow: 2px 2px 4px var(--cor-preta);
 }
 
 .banner-description {
@@ -310,6 +311,7 @@ body {
 
 .forecast-card-date {
     font-size: 22px;
+    text-align: center;
     font-weight: 700;
     font-family: 'Rubik', sans-serif;
 }

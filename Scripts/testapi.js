@@ -164,7 +164,7 @@ function converterDia(dataCompleta){
     const diaSemana = dias[a.getDay()];
     const dia = a.getDate();
     const mes = a.getMonth() + 1;
-    return `${diaSemana} - ${dia}/${mes}`;
+    return `${diaSemana} </br> ${dia}/${mes}`;
 }
 
 async function getForecast(lat,lon){
