@@ -628,10 +628,12 @@
 
     .forecast-card-condicao {
         font-size: 16px;
+        text-align: center;
     }
 
     .forecast-card-temps {
         font-size: 14px;
+        text-align: center;
     }
 
     .forecast-card-chuva {
@@ -645,5 +647,284 @@
 }
 
 @media (max-width: 480px){
+    /* HEADER STYLING */
+    .header-title {
+        font-size: 20px;
+    }
 
+    .menu-hamburger {
+        font-size: 14px;
+    }
+
+    /* SIDEPANEL STYLING */
+    .sidepanel-link {
+        font-size: 14px;
+        padding-left: 0.5em;
+    }
+
+    /* BANNER STYLING */
+    .banner-title {
+        font-size: 34px;
+    }
+
+    /* INPUT STYLING */
+    .input-search {
+        font-size: 13px;
+    }
+
+    /* WEAHTER RESULTS STYLING */
+    .city-name {
+        font-size: 20px;
+    }
+
+    .city-date {
+        font-size: 15px;
+    }
+
+    .city-weather-infos {
+        padding: 1em 0.5em;
+    }
+
+    .weather-temperatura {
+        font-size: 34px;
+    }
+
+    .weather-sensacao {
+        font-size: 14px;
+    }
+    
+    .icone-clima {
+        width: 90px;
+    }
+
+    /* WEATHER DETAILS STYLING */
+    .weather-condition {
+        font-size: 20px;
+    }
+
+    .weather-conditions-details {
+        font-size: 11px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-flow: wrap;
+        gap: 10px;
+    }
+
+    /* FORECAST STYLING */
+    .forecast-title {
+        font-size: 20px;
+    }
+
+    .forecast-title-obs {
+        font-size: 15px;
+    }
+
+    .forecast-card-date, .forecast-card-condicao {
+        font-size: 15px;
+    }
+
+    .forecast-card-icon {
+        width: 70px;
+    }
+
+    .forecast-card-condicao, .forecast-card-temps, .forecast-card-date {
+        text-align: center;
+    }
+
+    .forecast-card-temps {
+        font-size: 13px;
+    }
+
+    .forecast-card-chuva {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 425px){
+    /* HEADER STYLING */
+    .header {
+        padding: 0.3em 0.5em;
+    }
+
+    .header-title {
+        font-size: 18px;
+    }
+
+    .menu-hamburger {
+        font-size: 12px;
+    }
+
+    /* SIDEPANEL STYLING */
+    .sidepanel-link {
+        font-size: 13px;
+    }
+
+    /* BANNER STYLING */
+    .banner-title {
+        font-size: 30px;
+    }
+
+    .banner-description {
+        font-size: 15px;
+    }
+
+    /* INPUT STYLING */
+    .input-search {
+        font-size: 12px;
+    }
+
+    /* WEATHER RESULTS STYLING */
+    .city-name {
+        font-size: 18px;
+    }
+
+    .city-date {
+        font-size: 14px;
+    }
+
+    .weather-temperatura {
+        font-size: 30px;
+    }
+
+    .weather-sensacao {
+        font-size: 13px;
+    }
+
+    .icone-clima {
+        width: 80px;
+    }
+
+    /* WEATHER DETAILS STYLING */
+    .weather-condition {
+        font-size: 18px;
+    }
+
+    /* FORECAST STYLING */
+    .forecast-title {
+        font-size: 18px;
+    }
+
+    .forecast-title-obs {
+        font-size: 14px;
+    }
+
+    .forecast-card-date, .forecast-card-condicao {
+        font-size: 14px;
+    }
+
+    .forecast-card-icon {
+        width: 70px;
+    }
+
+    .forecast-card-temps {
+        font-size: 12px;
+    }
+
+    .forecast-card-chuva {
+        font-size: 11px;
+    }
+
+    /* FOOTER STYLING */
+    .footer {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px){
+    /* HEADER STYLING */
+    .header-title {
+        font-size: 16px;
+    }
+
+    .menu-hamburger {
+        font-size: 10px;
+    }
+
+    .bandeira-lang {
+        width: 30px;
+    }
+
+    /* SIDEPANEL STYLING */
+    .sidepanel-link {
+        font-size: 12px;
+    }
+
+    /* BANNER STYLING */
+    .banner-title {
+        font-size: 26px;
+    }
+
+    .banner-description {
+        font-size: 14px;
+    }
+
+    /* INPUT STYLING */
+    .input-search {
+        font-size: 11px;
+    }
+
+    .btn-search {
+        font-size: 10px;
+    }
+
+    /* WEATHER RESULTS STYLING */
+    .city-name {
+        font-size: 16px;
+    }
+
+    .city-date {
+        font-size: 13px;
+    }
+
+    .city-weather-infos {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .weather-temperatura {
+        font-size: 26px;
+    }
+
+    .weather-sensacao {
+        font-size: 12px;
+    }
+
+    /* WEATHER DETAILS STYLING */
+
+    .weather-conditions-container {
+        margin-top: 1em;
+        margin-left: 0;
+    }
+
+    .weather-condition {
+        text-align: center;
+    }
+
+    /* FORECAST STYLING */
+    .forecast-title {
+        font-size: 16px;
+    }
+
+    .forecast-card-date, .forecast-card-condicao {
+        font-size: 12px;
+    }
+
+    .forecast-card-icon {
+        width: 60px;
+    }
+
+    .forecast-card-temps {
+        font-size: 11px;
+    }
+
+    .forecast-card-chuva {
+        font-size: 10px;
+    }
+
+    /* FOOTER STYLING */
+    .footer {
+        font-size: 12px;
+    }
 }
