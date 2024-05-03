@@ -12,7 +12,6 @@ body {
 }
 
 /* HEADER STYLING */
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -77,7 +76,7 @@ body {
     color: var(--cor-branca);
 }
 
-.sidepanel-link:nth-last-child(-n+2){
+.sidepanel-link:nth-last-child(-n+1){
     color: rgba(128, 128, 128, 0.5);
     background-color: rgba(128, 128, 128, 0.461);
     cursor: not-allowed;
