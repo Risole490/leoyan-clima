@@ -164,7 +164,7 @@ function converterDia(dataCompleta){
     const diaSemana = dias[a.getDay()];
     const dia = a.getDate();
     const mes = a.getMonth() + 1;
-    return `${diaSemana} - ${dia}/${mes}`;
+    return `${diaSemana} </br> ${dia}/${mes}`;
 }
 
 async function getForecast(lat,lon){
@@ -231,39 +231,41 @@ async function getForecast(lat,lon){
 
         forecastArea.innerHTML = `
             <h2 class="forecast-title">Previsão para os próximos dias</h2>
+            <h4 class="forecast-title-obs">(Baseado no momento atual de pesquisa)</h4>
+
             <div class="forecast-cards-container">
                 <div class="forecast-card">
                     <h3 class="forecast-card-date">${datas[0]}</h3>
                     <img src="${icones[0]}" alt="Ícone do clima" class="forecast-card-icon">
-                    <p class="forecast-card-temps">Máx: ${tempsMax[0]}°C - Min: ${tempsMin[0]}°C</p>
+                    <p class="forecast-card-temps">Máx: ${tempsMax[0]}°C </br> Min: ${tempsMin[0]}°C</p>
                     <p class="forecast-card-condicao">${condicoes[0]}</p>
                     <p class="forecast-card-chuva">Chance de chuva: ${chanceChuva[0]}</p>
                 </div>
                 <div class="forecast-card">
                     <h3 class="forecast-card-date">${datas[1]}</h3>
                     <img src="${icones[1]}" alt="Ícone do clima" class="forecast-card-icon">
-                    <p class="forecast-card-temps">Máx: ${tempsMax[1]}°C - Min: ${tempsMin[1]}°C</p>
+                    <p class="forecast-card-temps">Máx: ${tempsMax[1]}°C </br> Min: ${tempsMin[1]}°C</p>
                     <p class="forecast-card-condicao">${condicoes[1]}</p>
                     <p class="forecast-card-chuva">Chance de chuva: ${chanceChuva[1]}</p>
                 </div>
                 <div class="forecast-card">
                     <h3 class="forecast-card-date">${datas[2]}</h3>
                     <img src="${icones[2]}" alt="Ícone do clima" class="forecast-card-icon">
-                    <p class="forecast-card-temps">Máx: ${tempsMax[2]}°C - Min: ${tempsMin[2]}°C</p>
+                    <p class="forecast-card-temps">Máx: ${tempsMax[2]}°C </br> Min: ${tempsMin[2]}°C</p>
                     <p class="forecast-card-condicao">${condicoes[2]}</p>
                     <p class="forecast-card-chuva">Chance de chuva: ${chanceChuva[2]}</p>
                 </div>
                 <div class="forecast-card">
                     <h3 class="forecast-card-date">${datas[3]}</h3>
                     <img src="${icones[3]}" alt="Ícone do clima" class="forecast-card-icon">
-                    <p class="forecast-card-temps">Máx: ${tempsMax[3]}°C - Min: ${tempsMin[3]}°C</p>
+                    <p class="forecast-card-temps">Máx: ${tempsMax[3]}°C </br> Min: ${tempsMin[3]}°C</p>
                     <p class="forecast-card-condicao">${condicoes[3]}</p>
                     <p class="forecast-card-chuva">Chance de chuva: ${chanceChuva[3]}</p>
                 </div>
                 <div class="forecast-card">
                     <h3 class="forecast-card-date">${datas[4]}</h3>
                     <img src="${icones[4]}" alt="Ícone do clima" class="forecast-card-icon">
-                    <p class="forecast-card-temps">Máx: ${tempsMax[4]}°C - Min: ${tempsMin[4]}°C</p>
+                    <p class="forecast-card-temps">Máx: ${tempsMax[4]}°C </br> Min: ${tempsMin[4]}°C</p>
                     <p class="forecast-card-condicao">${condicoes[4]}</p>
                     <p class="forecast-card-chuva">Chance de chuva: ${chanceChuva[4]}</p>
                 </div>
